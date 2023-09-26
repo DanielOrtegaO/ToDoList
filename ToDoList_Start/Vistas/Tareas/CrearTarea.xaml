@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList_Start.Vistas.Tareas.CrearTarea"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="{Binding ColorOpacidad}">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding TituloCrearTarea}"
+                       FontAttributes="Italic,Bold"
+                       FontSize="25"
+                       Margin="65,180,0,6" />
+            </StackLayout>
+            <Frame Padding="20,20"
+                   Margin="20,0,20,400"
+                   CornerRadius="20"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   HasShadow="False"
+                   BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                   BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Definición de la tarea:"
+                           FontSize="20"
+                           TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="EndAndExpand" />
+                    <Frame CornerRadius="5"
+                           BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                           BackgroundColor="{AppThemeBinding Dark={StaticResource Entry_Background_Dark}, Light={StaticResource Entry_Background_Light}}"
+                           Padding="10,0"
+                               Margin="0,5"
+                               HasShadow="False">
+                            <Entry Placeholder="Nueva Tarea"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                               PlaceholderColor="{AppThemeBinding Dark={StaticResource Entry_Placeholder_Dark}, Light={StaticResource Entry_Placeholder_Light}}"
+                               VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   MaxLength="75"
+                                   WidthRequest="260"
+                                   Text="{Binding NombreTareaCampo}"/>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Prioridad:"
+                                   FontSize="20"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                   VerticalOptions="Center"
+                                   Padding="0,0,-50,0" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                        <Label Text="Baja"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                               HorizontalOptions="StartAndExpand" />
+                        <Label Text="Media"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}" />
+                        <Label Text="Alta"
+                               HorizontalOptions="EndAndExpand"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}" />
+                    </StackLayout>
+                        <StackLayout>
+                            <Slider Scale="1.05"
+                                    Minimum="0"
+                                    Maximum="2"
+                                    Margin="0,0,0,0"
+                                    Value="{Binding PrioridadTarea, Mode=TwoWay}"
+                                    DragCompletedCommand="{Binding RedondearPrioridadCommand}"
+                                    ThumbColor="{Binding CategoriaNuevaTarea.ColorCategoria}"
+                                    MinimumTrackColor="{Binding ColorOpacidad}"
+                                    MaximumTrackColor="Gray"/>
+                        </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xE040;"
+                               FontFamily="menu_iconos"
+                               TextColor="{Binding CategoriaNuevaTarea.ColorCategoria}"
+                               HorizontalOptions="StartAndExpand"
+                               Margin="5,0,0,0"
+                               FontSize="Medium"/>
+                        <Label Text="&#xE03F;"
+                               FontFamily="menu_iconos"
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="{Binding CategoriaNuevaTarea.ColorCategoria}"
+                               Margin="0,0,0,0"
+                               FontSize="Medium"/>
+                        <Label Text="&#xE03E;"
+                               FontFamily="menu_iconos"
+                               HorizontalOptions="EndAndExpand"
+                               TextColor="{Binding CategoriaNuevaTarea.ColorCategoria}"
+                               Margin="0,0,5,0"
+                               FontSize="Medium"/>
+                    </StackLayout>
+                    <Label Text="Fecha:"
+                               FontSize="20"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               VerticalOptions="Center"
+                               Padding="0,0,-50,0" />
+                        <Frame HasShadow="False"
+                           BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                           BackgroundColor="{AppThemeBinding Dark={StaticResource Entry_Background_Dark}, Light={StaticResource Entry_Background_Light}}"
+                           Padding="0"
+                               Margin="0,0,0,10">
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontFamily="menu_iconos"
+                                       VerticalOptions="Center"
+                                       Text="&#xE01D;"
+                                       FontSize="Large"
+                                       TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                       HorizontalOptions="Start"
+                                       Margin="7,0,0,0" />
+                            <DatePicker  
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                FontSize="20"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"
+                                Date="{Binding FechaFinCampo, Mode=TwoWay}"
+                                Format="ddd dd 'de' MMMM 'de' yyyy" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Hora:"
+                               FontSize="20"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               VerticalOptions="Center"
+                               Padding="0,0,-50,0"
+                               />
+                    <Frame HasShadow="False"
+                           BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                           BackgroundColor="{AppThemeBinding Dark={StaticResource Entry_Background_Dark}, Light={StaticResource Entry_Background_Light}}"
+                           Padding="0"
+                           Margin="0,0,0,10">
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontFamily="menu_iconos"
+                                   VerticalOptions="Center"
+                                   Text="&#xE01F;"
+                                   FontSize="Large"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                   HorizontalOptions="Start"
+                                   Margin="7,0,0,0" />
+                            <TimePicker 
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                FontSize="20"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"
+                                Time="{Binding HoraFinCampo, Mode=TwoWay}" />
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Button TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Void_Background_Dark}, Light={StaticResource Void_Background_Light}}"
+                                BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                Text="Cancelar"
+                                TextTransform="None"
+                                CornerRadius="10"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding CerrarCrearTareaCommand}" />
+                        <Button 
+                                Text="Guardar"
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                TextTransform="None"
+                                CornerRadius="10"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding NuevaTareaAsyncCommand}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

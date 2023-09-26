@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList_Start.Vistas.Tareas.TareasPrincipal"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+   
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="{Binding ColorOpacidad}">
+            <Frame 
+                Padding="0,15"
+                   VerticalOptions="FillAndExpand"
+                   HasShadow="False"
+                   BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}">
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".1*" />
+                            <ColumnDefinition Width=".9*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding CategoriaTareas.IconoCategoria}"
+                               FontFamily="iconos"
+                               FontSize="35"
+                               Margin="10,2,0,0"
+                               VerticalOptions="Center"
+                               TextColor="{Binding CategoriaTareas.ColorCategoria}"
+                               Grid.Column="0"
+                               Grid.Row="0"/>
+                        <Label Text="{Binding CategoriaTareas.NombreCategoria}"
+                               FontAttributes="Bold"
+                               FontSize="Title"
+                               Padding="0,0"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               VerticalOptions="Center"
+                               Grid.Column="1"
+                               Grid.Row="0" />
+                    </Grid>
+                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="StartAndExpand">
+                            <Button FontFamily="menu_iconos"
+                                    Margin="3,0,0,0"
+                                    FontSize="30"
+                                    WidthRequest="50"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                    BorderColor="#FFE8E8E8"
+                                    BorderWidth="0"
+                                    TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                    Text="&#xE029;"
+                                    Command="{Binding EscogerOrdenTareasCommand}"/>
+                            <Label Text="{Binding TextoOrden}"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   VerticalOptions="Center"
+                                   FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="EndAndExpand"
+                                     IsVisible="True">
+                            <Button FontFamily="menu_iconos"
+                                    FontSize="30"
+                                    WidthRequest="50"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="Center"
+                                    Margin="0,0"
+                                    BorderColor="#FFE8E8E8"
+                                    BorderWidth="0"
+                                    TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                    Text="{Binding IconoMarcar}"
+                                    Command="{Binding MarcarTareasAsyncCommand}"
+                                    CommandParameter="{Binding CategoriaTareas}"
+                                    BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}" />
+                            <Button FontFamily="menu_iconos"
+                                FontSize="25"
+                                WidthRequest="45"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="Center"
+                                Margin="0,0,3,0"
+                                BorderColor="#FFE8E8E8"
+                                BorderWidth="0"
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                Text="&#xE011;"
+                                Command="{Binding EliminarTareasAsyncCommand}"
+                                CommandParameter="{Binding CategoriaTareas}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Frame
+                           VerticalOptions="FillAndExpand"
+                           Padding="0,2"
+                           Margin="0,0"
+                           BackgroundColor="{AppThemeBinding Dark={StaticResource List_Background_Dark}, Light={StaticResource List_Background_Light}}"
+                           BorderColor="{AppThemeBinding Dark={StaticResource List_Border_Dark}, Light={StaticResource List_Border_Light}}"
+                           CornerRadius="0"
+                           HasShadow="False">
+                        <Grid>
+                            <Label Text="No hay Tareas"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Margin="0,20"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   IsVisible="{Binding ListaVacia}" />
+                            <CollectionView ItemsSource="{Binding ColeccionTareas, Mode=Default}"
+                                        SelectionMode="None"
+                                        x:Name="listatareas">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                        <SwipeView BackgroundColor="Transparent">
+                                            <SwipeView.RightItems>
+                                                <SwipeItems Mode="Execute">
+                                                    <SwipeItem Text="ELIMINAR"
+                                                               BackgroundColor="{AppThemeBinding Dark={StaticResource Swipe_Delete_Dark}, Light={StaticResource Swipe_Delete_Light}}"
+                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarTareaAsyncCommand}"
+                                                               CommandParameter="{Binding .}" />
+                                                </SwipeItems>
+                                            </SwipeView.RightItems>
+                                            <SwipeView.LeftItems>
+                                                <SwipeItems Mode="Execute">
+                                                    <SwipeItem Text="EDITAR"
+                                                               BackgroundColor="{AppThemeBinding Dark={StaticResource Swipe_Edit_Dark}, Light={StaticResource Swipe_Edit_Light}}"
+                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirEditarTareaAsyncCommand}"
+                                                               CommandParameter="{Binding .}" />
+                                                </SwipeItems>
+                                            </SwipeView.LeftItems>
+                                            <StackLayout BackgroundColor="Transparent"
+                                                         Orientation="Vertical"
+                                                         Padding="0,0">
+                                                <Frame Padding="10,15"
+                                                       Margin="4,2,4,2"
+                                                       BorderColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CategoriaTareas.ColorCategoria}"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       CornerRadius="8"
+                                                       HasShadow="False"
+                                                       BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}">
+                                                <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirMicroTareasAsyncCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                    </Frame.GestureRecognizers>
+                                                    <StackLayout Orientation="Vertical">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding NombreTarea}"
+                                                                   FontSize="Medium"
+                                                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                                                   HorizontalOptions="StartAndExpand"
+                                                                   VerticalOptions="Center" />
+                                                            <!--<Button FontFamily="menu_iconos"
+                                                                WidthRequest="45"
+                                                                HeightRequest="30"
+                                                                FontSize="28"
+                                                                HorizontalOptions="EndAndExpand"
+                                                                BackgroundColor="White"
+                                                                BorderColor="#FFE8E8E8"
+                                                                BorderWidth="0"
+                                                                Padding="0,-3,0,0"
+                                                                Margin="0,0,2,0"
+                                                                TextColor="#767676"
+                                                                Text="&#xE01B;"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirEditarTareaAsyncCommand}"
+                                                                CommandParameter="{Binding}" />-->
+                                                            <!--<Label TextColor="Gray"
+                                                                   Text="{Binding IconoPrioridad}"
+                                                                   FontFamily="menu_iconos"
+                                                                   WidthRequest="45"
+                                                                   HeightRequest="30"
+                                                                   FontSize="28" />-->
+                                                            <CheckBox IsChecked="{Binding Realizada, Mode=TwoWay}"
+                                                                      Color="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CategoriaTareas.ColorCategoria}"
+                                                                      VerticalOptions="Center"
+                                                                      Scale="1.35"
+                                                                      Margin="0,0,7,0">
+                                                                <CheckBox.Behaviors>
+                                                                    <xct:EventToCommandBehavior EventName="CheckedChanged"
+                                                                                                Command="{Binding Path=BindingContext.ActualizarTareaBDCommand, Source={x:Reference listatareas}}"
+                                                                                                CommandParameter="{Binding}" />
+                                                                </CheckBox.Behaviors>
+                                                            </CheckBox>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label TextColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CategoriaTareas.ColorCategoria}"
+                                                                   Text="{Binding IconoPrioridad}"
+                                                                   FontFamily="menu_iconos"
+                                                                   WidthRequest="35"
+                                                                   HeightRequest="20"
+                                                                   FontSize="20" />
+                                                            <Label                                 
+                                                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                                                Text="{Binding FechaFin, StringFormat='{0: dddd dd \\de MMMM, yyyy - HH:mm}'}"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </SwipeView>
+                                    </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        </Grid>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand"
+                                 VerticalOptions="End"
+                                 IsClippedToBounds="False">
+                        <Label Text="Nueva Tarea"
+                               FontSize="23"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               VerticalOptions="Center" />
+                        <Button WidthRequest="90"
+                                Margin="0,0,20,0"
+                                BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                FontFamily="menu_iconos"
+                                FontSize="50"
+                                Text="&#xE019;"
+                                CornerRadius="90"
+                                HorizontalOptions="EndAndExpand"
+                                Command="{Binding AbrirNuevaTareaAsyncCommand}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

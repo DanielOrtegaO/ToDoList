@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList_Start.Vistas.Categorias.CrearCategoria"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="{AppThemeBinding Dark={StaticResource Void_Background_Dark}, Light={StaticResource Void_Background_Light}}">
+            <Label Text="{Binding TituloCrearCategoria}"
+                   FontAttributes="Italic,Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                   FontSize="25"
+                   Margin="50,180,0,0" />
+            <Frame Padding="30,20"
+                   Margin="30,0,30,400"
+                   CornerRadius="20"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   HasShadow="False"
+                   BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                   BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}">
+                <StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Nombre de la categoría:"
+                               FontSize="20"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               VerticalOptions="Center"
+                               Padding="0,0,-50,0" />
+                        <Frame CornerRadius="5"
+                               BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                               BackgroundColor="{AppThemeBinding Dark={StaticResource Entry_Background_Dark}, Light={StaticResource Entry_Background_Light}}"
+                               Padding="10,0"
+                               Margin="0,5"
+                               HasShadow="False">
+                            <Entry Placeholder="Introduce el nombre de la categoría"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   PlaceholderColor="{AppThemeBinding Dark={StaticResource Entry_Placeholder_Dark}, Light={StaticResource Entry_Placeholder_Light}}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="{Binding NombreCategoriaCampo}"
+                                   MaxLength="25"/>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Icono y color:"
+                                   FontSize="20"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   VerticalOptions="Center"
+                                   Padding="0,0,-50,0" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,5,0,20"
+                                     HorizontalOptions="CenterAndExpand">
+                            <Button CornerRadius="5"
+                                    Text="{Binding IconoCampo}"
+                                    TextColor="{Binding ColorCategoriaCampo}"
+                                    FontFamily="iconos"
+                                    FontSize="35"
+                                    BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                    BorderWidth="2"
+                                    BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                    Command="{Binding AbrirIconosCommand}" />
+                            <Button CornerRadius="30"
+                                    ScaleY=".8"
+                                    ScaleX=".65"
+                                    BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                    BorderWidth="2"
+                                    BackgroundColor="{Binding ColorCategoriaCampo}"
+                                    Command="{Binding AbrirColorCommand}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button 
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Void_Background_Dark}, Light={StaticResource Void_Background_Light}}"
+                                BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                Text="Cancelar"
+                                TextTransform="None"
+                                CornerRadius="10"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding CerrarCrearCategoriaCommand}"/>
+                        <Button TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                Text="Guardar"
+                                TextTransform="None"
+                                CornerRadius="10"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding NuevaCategoriaAsyncCommand}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

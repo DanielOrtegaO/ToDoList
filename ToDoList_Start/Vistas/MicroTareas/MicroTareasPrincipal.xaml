@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList_Start.Vistas.MicroTareas.MicroTareasPrincipal"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasNavigationBar="False">
+  <ContentPage.Content>
+      <StackLayout Orientation="Vertical">
+            <Frame
+                Padding="0,15"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Button FontFamily="menu_iconos"
+                                Text="&#xE00A;"
+                                FontSize="30"
+                                BorderWidth="0"
+                                Margin="10,0,0,0"
+                                Padding="-5,0,0,0"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark},
+                                Light={StaticResource Text_Content_Light}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark},
+                                Light={StaticResource Menu_Background_Light}}"
+                                Command="{Binding CerrarMicroTareasPrincipalCommand}" />
+                        <Label Text="{Binding TareaMicroTareas.NombreTarea}"
+                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                               FontSize="Title"
+                               FontAttributes="Italic"
+                               VerticalOptions="Center" />
+                        <!--<CheckBox HorizontalOptions="EndAndExpand"
+                                  Margin="0,0,15,0"
+                                  Color="{Binding CategoriaMicroTareas.ColorCategoria}"
+                                  Scale="1.5"/>-->
+                    </StackLayout>
+                    <Frame
+                           VerticalOptions="FillAndExpand"
+                           Padding="0,2"
+                           Margin="0,0,0,0"
+                           BackgroundColor="{AppThemeBinding Dark={StaticResource List_Background_Dark}, Light={StaticResource List_Background_Light}}"
+                           BorderColor="{AppThemeBinding Dark={StaticResource List_Border_Dark}, Light={StaticResource List_Border_Light}}"
+                           CornerRadius="0"
+                           HasShadow="False">
+                        <Grid>
+                            <Label Text="No hay MicroTareas"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Margin="0,20"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   IsVisible="{Binding ListaVacia}"/>
+                            <CollectionView ItemsSource="{Binding ColeccionMicroTareas, Mode=Default}"
+                                            SelectionMode="None"
+                                            x:Name="listamicrotareas">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <SwipeView BackgroundColor="Transparent">
+                                            <SwipeView.RightItems>
+                                                <SwipeItems Mode="Execute">
+                                                    <SwipeItem Text="ELIMINAR"
+                                                               BackgroundColor="{AppThemeBinding Dark={StaticResource Swipe_Delete_Dark}, Light={StaticResource Swipe_Delete_Light}}"
+                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.BorrarMicroTareaAsyncCommand}"
+                                                               CommandParameter="{Binding .}" />
+                                                </SwipeItems>
+                                            </SwipeView.RightItems>
+                                            <StackLayout BackgroundColor="Transparent"
+                                                         Orientation="Vertical"
+                                                         Padding="0,0">
+                                                <Frame Padding="10,15"
+                                                       Margin="4,2,4,2"
+                                                       BackgroundColor="{AppThemeBinding Dark={StaticResource Menu_Background_Dark}, Light={StaticResource Menu_Background_Light}}"
+                                                       BorderColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CategoriaMicroTareas.ColorCategoria}"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       CornerRadius="8">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding NombreMicroTarea}"
+                                                               TextColor="{AppThemeBinding Dark={StaticResource Text_Title_Dark}, Light={StaticResource Text_Title_Light}}"
+                                                               HorizontalOptions="StartAndExpand"
+                                                               VerticalOptions="Center" />
+                                                        <CheckBox IsChecked="{Binding Realizada, Mode=TwoWay}"
+                                                                  Color="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CategoriaMicroTareas.ColorCategoria}"
+                                                                  VerticalOptions="Center"
+                                                                  Scale="1.35"
+                                                                  Margin="0,0,7,0">
+                                                            <CheckBox.Behaviors>
+                                                                <xct:EventToCommandBehavior EventName="CheckedChanged"
+                                                                                            Command="{Binding Path=BindingContext.ActualizarMicroTareaBDCommand, Source={x:Reference listamicrotareas}}"
+                                                                                            CommandParameter="{Binding}" />
+                                                            </CheckBox.Behaviors>
+                                                        </CheckBox>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </SwipeView>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </Grid>
+                    </Frame>
+                    <StackLayout>
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".88*"/>
+                            <ColumnDefinition Width=".12*"/>
+                        </Grid.ColumnDefinitions>-->
+                        <Frame CornerRadius="5"
+                               BorderColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                               BackgroundColor="{AppThemeBinding Dark={StaticResource Entry_Background_Dark}, Light={StaticResource Entry_Background_Light}}"
+                               Padding="0,0"
+                               Margin="10,8,10,0"
+                               VerticalOptions="Center"
+                               HasShadow="False">
+                            <Entry x:Name="NombreMicroTareaCampo"
+                                   Placeholder="Nueva MicroTarea"
+                                   TextColor="{AppThemeBinding Dark={StaticResource Text_Content_Dark}, Light={StaticResource Text_Content_Light}}"
+                                   PlaceholderColor="{AppThemeBinding Dark={StaticResource Entry_Placeholder_Dark}, Light={StaticResource Entry_Placeholder_Light}}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   MaxLength="75"
+                                   Text="{Binding NombreMicroTarea}"
+                                   Keyboard="Chat"
+                                   ReturnType="Next">
+                                <Entry.Behaviors>
+                                    <xct:EventToCommandBehavior EventName="Completed"
+                                                                Command="{Binding GuardarMicroTareaBDCommand}"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                        </Frame>
+                        <!--<Button HorizontalOptions="EndAndExpand"
+                                Grid.Column="1"
+                                FontFamily="menu_iconos"
+                                Text="&#xE038;"
+                                CornerRadius="35"
+                                FontSize="35"
+                                Margin="0,0,0,0"
+                                Padding="0,0,0,0"
+                                BorderWidth="0"
+                                TextColor="{Binding CategoriaMicroTareas.ColorCategoria}"
+                                Command="{Binding GuardarMicroTareaBDCommand}"/>-->
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+      </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

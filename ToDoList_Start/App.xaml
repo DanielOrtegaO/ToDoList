@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList_Start.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#FF3399FF</Color>
+            <Color x:Key="Void_Background_Light">#F0F0F0</Color>
+            <Color x:Key="Void_Background_Dark">#212121</Color>
+            
+            <Color x:Key="Menu_Background_Light">White</Color>
+            <Color x:Key="Menu_Background_Dark">Black</Color>
+            
+            <Color x:Key="List_Background_Light">#F0F0F0</Color>
+            <Color x:Key="List_Background_Dark">#141414</Color>
+            
+            <Color x:Key="List_Border_Light">#FFCBCBCB</Color>
+            <Color x:Key="List_Border_Dark">#0F0F0F</Color>
+            
+            <Color x:Key="Text_Title_Light">#FF565656</Color>
+            <Color x:Key="Text_Title_Dark">#FFEBEBEB</Color>
+            
+            <Color x:Key="Text_Content_Light">#FF767676</Color>
+            <Color x:Key="Text_Content_Dark">#FFBFBFBF</Color>
+            
+            <Color x:Key="Entry_Background_Light">#FFFFFFFF</Color>
+            <Color x:Key="Entry_Background_Dark">#FF262626</Color>
+            
+            <Color x:Key="Entry_Placeholder_Light">#FFBDBDBD</Color>
+            <Color x:Key="Entry_Placeholder_Dark">#FF828282</Color>
+            
+            <Color x:Key="Swipe_Edit_Light">#FFB6D6D2</Color>
+            <Color x:Key="Swipe_Edit_Dark">#FF1D8C7E</Color>
+            
+            <Color x:Key="Swipe_Delete_Light">#FFD0BCBF</Color>
+            <Color x:Key="Swipe_Delete_Dark">#FF85454E</Color>
+            
+            <Style TargetType="Button">
+                <Setter Property="BorderRadius"
+                        Value="15" />
+                <Setter Property="BorderWidth"
+                        Value="2" />
+                <Setter Property="BorderColor"
+                        Value="{StaticResource Primary}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource Primary}"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="White" />
+                <Setter Property="BarTextColor"
+                        Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
